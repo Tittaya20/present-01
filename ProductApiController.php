@@ -20,7 +20,8 @@ class ProductApiController extends Controller
     {
         $products = DB::table('products')
         ->join('brand','products.brand_id', '=', 'brand.id')
-        ->select('products.*','brand.brand_name')
+        ->join('category','products.category_id','=','category.id')
+        ->select('products.*','brand.brand_name','category.category_name')
         ->get();
         return $products;
     }
@@ -43,9 +44,11 @@ class ProductApiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    { $products = DB::table('products')
+    {
+        $products = DB::table('products')
         ->join('brand','products.brand_id', '=', 'brand.id')
-        ->select('products.*','brand.brand_name')
+        ->join('category','products.category_id','=','category.id')
+        ->select('products.*','brand.brand_name','category.category_name')
         ->get();
         return $products;
     }
